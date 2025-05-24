@@ -34,7 +34,7 @@ func (p *parking) Seed(maxFloor, maxCol, maxRow int) error {
 				case parkingentity.A1:
 					p.AvailableSpots.A1.Enqueue(parkingentity.Spot{Floor: floor, Col: col, Row: row})
 				default:
-					
+					// do nothing
 				}
 
 			}

@@ -86,3 +86,9 @@ all the test cover the requirement and the edge cases
 
 ### running test
 you can run the test using `go test -race -v ./...` command.
+
+## Test Coverage
+### queuex
+![queuex coverage](./assets/queuex-coverage.png)
+### parking cli
+![parking cli coverage](./assets/parking-cli-coverage.png)
