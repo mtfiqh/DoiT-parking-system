@@ -199,19 +199,21 @@ func RunParkingSimulation() {
 
 	if err := wg.Wait(); err != nil {
 		log.Fatal(errors.Wrap(err, "error in parking simulation"))
-	} else {
-		log.Println("Parking simulation completed successfully.")
-		a1, _ := park.AvailableSpot(parkingentity.A1)
-		b1, _ := park.AvailableSpot(parkingentity.B1)
-		m1, _ := park.AvailableSpot(parkingentity.M1)
-		log.Println("RESULT:")
-		log.Printf("before: A1: %d, B1: %d, M1: %d", beforeA1, beforeB1, beforeM1)
-		log.Printf("after: A1: %d, B1: %d, M1: %d", a1, b1, m1)
-		log.Printf("remaining vehicles parked: %d", len(parked))
-
-		totalBefore := beforeA1 + beforeB1 + beforeM1
-		totalAfter := a1 + b1 + m1
-		log.Printf("total spots: %d, total free spots: %d, remaining + free spots: %d", totalBefore, totalAfter, totalAfter+len(parked))
-		log.Printf("total executions: %d", i)
+		return
 	}
+
+	log.Println("Parking simulation completed successfully.")
+	a1, _ := park.AvailableSpot(parkingentity.A1)
+	b1, _ := park.AvailableSpot(parkingentity.B1)
+	m1, _ := park.AvailableSpot(parkingentity.M1)
+	log.Println("RESULT:")
+	log.Printf("before: A1: %d, B1: %d, M1: %d", beforeA1, beforeB1, beforeM1)
+	log.Printf("after: A1: %d, B1: %d, M1: %d", a1, b1, m1)
+	log.Printf("remaining vehicles parked: %d", len(parked))
+
+	totalBefore := beforeA1 + beforeB1 + beforeM1
+	totalAfter := a1 + b1 + m1
+	log.Printf("total spots: %d, total free spots: %d, remaining + free spots: %d", totalBefore, totalAfter, totalAfter+len(parked))
+	log.Printf("total executions: %d", i)
+
 }
