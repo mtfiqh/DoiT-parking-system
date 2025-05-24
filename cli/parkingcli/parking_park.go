@@ -1,4 +1,4 @@
-package parking
+package parkingcli
 
 import (
 	"doit-parking/parking/parkingentity"
