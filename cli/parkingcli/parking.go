@@ -1,9 +1,9 @@
 package parkingcli
 
 import (
-	parkingpkg "doit-parking/parking"
-	"doit-parking/parking/parkingentity"
-	"doit-parking/pkg/queuex"
+	parkingpkg "github.com/mtfiqh/DoiT-parking-system/parking"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/queuex"
 	"sync"
 )
 

@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"doit-parking/cli"
 	"fmt"
+	"github.com/mtfiqh/DoiT-parking-system/cli"
 	"github.com/spf13/cobra"
 	"time"
 )

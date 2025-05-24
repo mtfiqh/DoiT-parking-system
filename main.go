@@ -1,7 +1,7 @@
 package main
 
 import (
-	"doit-parking/cmd"
+	"github.com/mtfiqh/DoiT-parking-system/cmd"
 )
 
 //TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click

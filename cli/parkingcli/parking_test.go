@@ -1,8 +1,8 @@
 package parkingcli
 
 import (
-	parkingpkg "doit-parking/parking"
-	"doit-parking/parking/parkingentity"
+	parkingpkg "github.com/mtfiqh/DoiT-parking-system/parking"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
 	"testing"
 )
 

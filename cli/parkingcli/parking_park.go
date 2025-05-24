@@ -1,8 +1,8 @@
 package parkingcli
 
 import (
-	"doit-parking/parking/parkingentity"
-	"doit-parking/pkg/queuex"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/queuex"
 )
 
 func (p *parking) Park(vehicleType parkingentity.VehicleType, vehicleNumber int) (*parkingentity.SpotID, error) {

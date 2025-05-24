@@ -1,7 +1,7 @@
 package parkingcli
 
 import (
-	"doit-parking/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
 )
 
 func (p *parking) SearchVehicle(vehicleNumber int) (*parkingentity.SpotID, error) {

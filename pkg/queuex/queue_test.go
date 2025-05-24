@@ -1,7 +1,7 @@
 package queuex_test
 
 import (
-	"doit-parking/pkg/queuex"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/queuex"
 	"sync"
 	"sync/atomic"
 	"testing"

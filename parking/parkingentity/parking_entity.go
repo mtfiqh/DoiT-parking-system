@@ -1,8 +1,8 @@
 package parkingentity
 
 import (
-	"doit-parking/pkg/queuex"
 	"fmt"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/queuex"
 )
 
 type (

@@ -1,7 +1,7 @@
 package parking
 
 import (
-	"doit-parking/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
 )
 
 // ParkingSystem interface defines the methods for parking operations.

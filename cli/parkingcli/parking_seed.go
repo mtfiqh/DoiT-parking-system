@@ -2,8 +2,8 @@ package parkingcli
 
 import (
 	"context"
-	"doit-parking/parking/parkingentity"
-	"doit-parking/pkg/randomizer"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/randomizer"
 	"golang.org/x/sync/errgroup"
 )
 

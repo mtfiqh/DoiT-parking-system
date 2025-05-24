@@ -2,10 +2,10 @@ package cli
 
 import (
 	"context"
-	"doit-parking/cli/parkingcli"
-	"doit-parking/parking/parkingentity"
-	"doit-parking/pkg/randomizer"
 	"fmt"
+	"github.com/mtfiqh/DoiT-parking-system/cli/parkingcli"
+	"github.com/mtfiqh/DoiT-parking-system/parking/parkingentity"
+	"github.com/mtfiqh/DoiT-parking-system/pkg/randomizer"
 	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
 	"log"
