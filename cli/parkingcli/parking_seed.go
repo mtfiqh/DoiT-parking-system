@@ -13,19 +13,19 @@ func (p *parking) Seed(maxFloor, maxCol, maxRow int) error {
 
 	p.Spaces = make([][][]int, maxFloor)
 	for i := 0; i < maxFloor; i++ {
-		p.Spaces[i] = make([][]int, maxCol)
-		for j := 0; j < maxCol; j++ {
-			p.Spaces[i][j] = make([]int, maxRow)
+		p.Spaces[i] = make([][]int, maxRow)
+		for j := 0; j < maxRow; j++ {
+			p.Spaces[i][j] = make([]int, maxCol)
 		}
 	}
 
 	for i := 0; i < maxFloor; i++ {
-		for j := 0; j < maxCol; j++ {
-			for k := 0; k < maxRow; k++ {
-				floor, col, row := i, j, k
+		for j := 0; j < maxRow; j++ {
+			for k := 0; k < maxCol; k++ {
+				floor, row, col := i, j, k
 				spot := randomizer.RandomizeEnum(parkingentity.A1, parkingentity.B1, parkingentity.M1, parkingentity.X0)
 
-				p.Spaces[floor][col][row] = int(spot)
+				p.Spaces[floor][row][col] = int(spot)
 				switch spot {
 				case parkingentity.B1:
 					p.AvailableSpots.B1.Enqueue(parkingentity.Spot{Floor: floor, Col: col, Row: row})

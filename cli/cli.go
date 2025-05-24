@@ -13,13 +13,7 @@ import (
 	"time"
 )
 
-func RunParkingSimulation() {
-	const (
-		floor  = 8
-		column = 1000
-		row    = 1000
-		gates  = 500
-	)
+func RunParkingSimulation(floor, column, row, gates int, duration time.Duration) error {
 
 	log.Println("Running parking simulation...")
 	log.Printf("floor: %d, column: %d, row: %d, gates: %d", floor, column, row, gates)
@@ -56,6 +50,7 @@ func RunParkingSimulation() {
 
 	if err := errg.Wait(); err != nil {
 		log.Fatal(errors.Wrap(err, "error getting initial available spots"))
+		return err
 	}
 
 	beforeA1 := <-a1countChan
@@ -72,7 +67,7 @@ func RunParkingSimulation() {
 	time.Sleep(5 * time.Second)
 
 	tnow := time.Now().Local()
-	tend := tnow.Add(15 * time.Second)
+	tend := tnow.Add(duration)
 
 	wg, _ := errgroup.WithContext(context.Background())
 
@@ -105,7 +100,8 @@ func RunParkingSimulation() {
 					if err != nil {
 						switch errors.Cause(err) {
 						case parkingentity.ErrSpotNotFound:
-						// means full, do nothing
+							// means full, do nothing
+							log.Printf("Parking full for vehicle %d of type %d", vehicleNum, vehicleType)
 						default:
 							err = errors.Wrap(err, fmt.Sprintf("parking vehicle %d of type %d", vehicleNum, vehicleType))
 							log.Println("Error parking vehicle:", err)
@@ -199,7 +195,7 @@ func RunParkingSimulation() {
 
 	if err := wg.Wait(); err != nil {
 		log.Fatal(errors.Wrap(err, "error in parking simulation"))
-		return
+		return err
 	}
 
 	log.Println("Parking simulation completed successfully.")
@@ -216,4 +212,5 @@ func RunParkingSimulation() {
 	log.Printf("total spots: %d, total free spots: %d, remaining + free spots: %d", totalBefore, totalAfter, totalAfter+len(parked))
 	log.Printf("total executions: %d", i)
 
+	return nil
 }
