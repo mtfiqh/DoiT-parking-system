@@ -13,6 +13,10 @@ notes:
 [Detail Requirement](./requirement/Take_home_assignment_-_LLD01.pdf)
 
 ### notes
+
+#### why i'm focus on CLI
+The purpose of this test is to assess my Go knowledge. While I usually focus on building APIs, I understand that making a system scalable often depends on supporting tools like databases and Redis, especially when it comes to handling race conditions and concurrency.
+
 i knew in requirement the threshold is start from 1, but i will start from 0, to make it easier to handle the index, so the parking spot will be defined as `floors`, `row`, `column` starting from 0.
 Then, for better readability, it can be easily add 1 each `floor`, `row`, `column` to display it to user.
 
@@ -83,10 +87,29 @@ here i create embedded interface called `parkingForDebug` to add ability to acce
 all the test cover the requirement and the edge cases
 
 ## How To run
+- go version `1.24`
 
+install dependencies with
+```bash
+go mod tidy
+```
 ### running test
 you can run the test using `go test -race -v ./...` command.
 
+### running simulation
+I'm a bit confused about how to simulate concurrency in a CLI program that requires user input. Since real-time user input makes concurrency simulation difficult, I decided to create a simulation instead.
+
+you can run with
+```bash
+go run main.go cli:simulate
+```
+
+and you can customize the simulation by passing some arguments
+- `--floors=8` to set the number of floors (default: 8)
+- `--rows=1000` to set the number of rows (default: 1000)
+- `--columns=1000` to set the number of columns (default: 1000)
+- `--duration=15s` to set the duration of the simulation (default: 15s)
+- `--gates=10` to set the number of gates (default: 10) <- how many concurrency
 ## Test Coverage
 ### queuex
 ![queuex coverage](./assets/queuex-coverage.png)

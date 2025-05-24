@@ -96,7 +96,7 @@ func TestSeedParkingSpots(t *testing.T) {
 				switch spaces[i][j][k] {
 				case int(parkingentity.M1):
 					if f, ok := avSpots.M1.Dequeue(); ok {
-						if f.Floor != i || f.Row != k || f.Col != j {
+						if f.Floor != i || f.Row != j || f.Col != k {
 							t.Fatalf("Expected M1 spot at (%d, %d, %d), got (%d, %d, %d)", i, j, k, f.Floor, f.Row, f.Col)
 						}
 					} else {
@@ -105,7 +105,7 @@ func TestSeedParkingSpots(t *testing.T) {
 
 				case int(parkingentity.B1):
 					if f, ok := avSpots.B1.Dequeue(); ok {
-						if f.Floor != i || f.Row != k || f.Col != j {
+						if f.Floor != i || f.Row != j || f.Col != k {
 							t.Fatalf("Expected B1 spot at (%d, %d, %d), got (%d, %d, %d)", i, j, k, f.Floor, f.Row, f.Col)
 						}
 					} else {
@@ -113,8 +113,8 @@ func TestSeedParkingSpots(t *testing.T) {
 					}
 				case int(parkingentity.A1):
 					if f, ok := avSpots.A1.Dequeue(); ok {
-						if f.Floor != i || f.Row != k || f.Col != j {
-							t.Fatalf("Expected A1 spot at (%d, %d, %d), got (%d, %d, %d)", i, j, k, f.Floor, f.Col, f.Row)
+						if f.Floor != i || f.Row != j || f.Col != k {
+							t.Fatalf("Expected A1 spot at (%d, %d, %d), got (%d, %d, %d)", i, j, k, f.Floor, f.Row, f.Col)
 						}
 					} else {
 						t.Fatalf("Expected A1 spot to be available, but it was not")
@@ -184,7 +184,7 @@ func TestPark(t *testing.T) {
 				}
 
 				//	validate spotID
-				if err == nil && spaces[spotID.Floor][spotID.Col][spotID.Row] != int(tc.vehicleType) {
+				if err == nil && spaces[spotID.Floor][spotID.Row][spotID.Col] != int(tc.vehicleType) {
 					t.Error("Expected spot to be occupied by the vehicle type, but it was not")
 				}
 
@@ -395,7 +395,7 @@ func TestPark(t *testing.T) {
 				for j, col := range space {
 					for k, row := range col {
 						if row == int(vehicleType) {
-							if spaces[countSpace].Floor != i || spaces[countSpace].Col != j || spaces[countSpace].Row != k {
+							if spaces[countSpace].Floor != i || spaces[countSpace].Row != j || spaces[countSpace].Col != k {
 								t.Fatalf("Expected %v spot at (%d, %d, %d), got (%d, %d, %d)", vehicleType, i, j, k, spaces[countSpace].Floor, spaces[countSpace].Col, spaces[countSpace].Row)
 							}
 
