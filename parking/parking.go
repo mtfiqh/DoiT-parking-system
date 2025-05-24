@@ -4,8 +4,8 @@ import (
 	"doit-parking/parking/parkingentity"
 )
 
-// Parking interface defines the methods for parking operations.
-type Parking interface {
+// ParkingSystem interface defines the methods for parking operations.
+type ParkingSystem interface {
 	Park(vehicleType parkingentity.VehicleType, vehicleNumber int) (*parkingentity.SpotID, error)
 	Unpark(spotID string, vehicleNumber int) error
 	AvailableSpot(vehicleType parkingentity.VehicleType) (int, []parkingentity.Spot)

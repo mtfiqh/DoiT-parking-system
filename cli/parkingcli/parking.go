@@ -17,7 +17,7 @@ type parking struct {
 }
 
 // NewPark initializes a new parking instance with empty spaces and available spots.
-func NewPark(opts ...ParkOption) (parkingpkg.Parking, error) {
+func NewPark(opts ...ParkOption) (parkingpkg.ParkingSystem, error) {
 	// get options
 	opt := &ParkOptions{}
 	for _, o := range opts {
