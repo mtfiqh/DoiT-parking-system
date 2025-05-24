@@ -259,7 +259,7 @@ func TestPark(t *testing.T) {
 				t.Fatalf("Failed to park A1 vehicle: %v", err)
 			}
 
-			err = park.Unpark("0-0-0", 2001)
+			err = park.Unpark("1000-1000-1000", 2001)
 			if err == nil {
 				t.Error("Expected an error when unparking with a mismatched spotID, but got none")
 			}

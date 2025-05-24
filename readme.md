@@ -104,7 +104,12 @@ you can run with
 go run main.go cli:simulate
 ```
 
-and you can customize the simulation by passing some arguments
+or you can use docker to run the simulation
+```bash
+docker build -t doit-parking-system:0.1 .
+docker run --rm doit-parking-system:0.1 cli:simulate
+```
+and you can customize the simulation by passing some arguments [flags]
 - `--floors=8` to set the number of floors (default: 8)
 - `--rows=1000` to set the number of rows (default: 1000)
 - `--columns=1000` to set the number of columns (default: 1000)
