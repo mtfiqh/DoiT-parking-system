@@ -1,4 +1,4 @@
-package parking
+package parkingcli
 
 import (
 	"context"
@@ -41,6 +41,6 @@ func (p *parking) Seed(maxFloor, maxCol, maxRow int) error {
 			}
 		}
 	}
-	
+
 	return nil
 }

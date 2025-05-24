@@ -1,12 +1,13 @@
-package parking
+package parkingcli
 
 import (
+	parkingpkg "doit-parking/parking"
 	"doit-parking/parking/parkingentity"
 	"testing"
 )
 
 type parkingForDebug interface {
-	Parking
+	parkingpkg.Parking
 	GetSpaces() [][][]int
 	GetAvailableSpots() *parkingentity.AvailableSpots
 	GetVehiclesParked() map[int]parkingentity.VehicleSpot
@@ -253,24 +254,24 @@ func TestPark(t *testing.T) {
 		})
 
 		t.Run("unpark A1 vehicle found but spotID not match", func(t *testing.T) {
-			_, err := park.Park(parkingentity.A1, 1001)
+			_, err := park.Park(parkingentity.A1, 2001)
 			if err != nil {
 				t.Fatalf("Failed to park A1 vehicle: %v", err)
 			}
 
-			err = park.Unpark("0-0-0", 1001)
+			err = park.Unpark("0-0-0", 2001)
 			if err == nil {
 				t.Error("Expected an error when unparking with a mismatched spotID, but got none")
 			}
 		})
 
 		t.Run("unpark A1, validate state park back to available spaces", func(t *testing.T) {
-			spotID, err := park.Park(parkingentity.A1, 1002)
+			spotID, err := park.Park(parkingentity.A1, 2002)
 			if err != nil {
 				t.Fatalf("Failed to park A1 vehicle: %v", err)
 			}
 
-			err = park.Unpark(spotID.ID(), 1002)
+			err = park.Unpark(spotID.ID(), 2002)
 			if err != nil {
 				t.Error("Expected no error when unparking a vehicle, but got:", err)
 			}
