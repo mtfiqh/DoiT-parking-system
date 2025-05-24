@@ -2,16 +2,21 @@ package randomizer
 
 import (
 	"math/rand"
-	"time"
 )
 
-var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
+func RandomizeEnum[T any](enums ...T) T {
 
-func Randomize[T any](enums ...T) T {
 	if len(enums) == 0 {
 		var zeroValue T
 		return zeroValue
 	}
 
-	return enums[rng.Intn(len(enums)-1)]
+	return enums[rand.Intn(len(enums))]
+}
+
+func RandomizeInt(min, max int) int {
+	if min >= max {
+		return min
+	}
+	return rand.Intn(max-min) + min + 1
 }
