@@ -125,7 +125,7 @@ func TestQueuexConcurrency(t *testing.T) {
 	// Launch goroutines that both enqueue and dequeue
 	wg.Add(numGoroutines * 2)
 
-	// Producer goroutines
+	// Producer goroutines (enqueue)
 	for i := 0; i < numGoroutines; i++ {
 		go func(workerID int) {
 			defer wg.Done()
@@ -136,7 +136,7 @@ func TestQueuexConcurrency(t *testing.T) {
 		}(i)
 	}
 
-	// Consumer goroutines
+	// Consumer goroutines (dequeue)
 	for i := 0; i < numGoroutines; i++ {
 		go func() {
 			defer wg.Done()
@@ -162,7 +162,7 @@ func TestQueuexConcurrency(t *testing.T) {
 			enqueuedItems, totalProcessed)
 	}
 
-	// Optional: verify remaining items can be dequeued
+	// verify remaining items can be dequeued
 	values := queue.Print()
 	if len(values) != remaining {
 		t.Errorf("Expected %d remaining values, got %d", remaining, len(values))

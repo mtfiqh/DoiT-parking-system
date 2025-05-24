@@ -7,13 +7,13 @@ import (
 )
 
 type parkingForDebug interface {
-	parkingpkg.Parking
+	parkingpkg.ParkingSystem
 	GetSpaces() [][][]int
 	GetAvailableSpots() *parkingentity.AvailableSpots
 	GetVehiclesParked() map[int]parkingentity.VehicleSpot
 }
 
-func newParkForTest(opts ...ParkOption) (parkingForDebug, error) {
+func newParkForDebug(opts ...ParkOption) (parkingForDebug, error) {
 	p, err := NewPark(opts...)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func TestSeedParkingSpots(t *testing.T) {
 		maxCols   = 1000
 	)
 	// Arrange
-	p, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+	p, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 	if err != nil {
 		t.Fatalf("Failed to create parking: %v", err)
 	}
@@ -133,7 +133,7 @@ func TestPark(t *testing.T) {
 	)
 
 	t.Run("test parking", func(t *testing.T) {
-		park, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+		park, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -194,7 +194,7 @@ func TestPark(t *testing.T) {
 	})
 
 	t.Run("test parking until space full", func(t *testing.T) {
-		park, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+		park, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -241,7 +241,7 @@ func TestPark(t *testing.T) {
 	})
 
 	t.Run("test park and unpark", func(t *testing.T) {
-		park, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+		park, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -295,7 +295,7 @@ func TestPark(t *testing.T) {
 	})
 
 	t.Run("test search vehicle", func(t *testing.T) {
-		park, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+		park, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -380,7 +380,7 @@ func TestPark(t *testing.T) {
 		})
 	})
 
-	park, err := newParkForTest(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
+	park, err := newParkForDebug(WithRandomizeParkingSpots(maxFloors, maxCols, maxRows))
 	if err != nil {
 		t.Fatal(err)
 	}
