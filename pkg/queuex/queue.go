@@ -21,6 +21,8 @@ func NewQueue[T any]() *Queue[T] {
 		mutex: new(sync.RWMutex),
 	}
 }
+
+// Enqueue adds an element to the end of the queue (tail).
 func (q *Queue[T]) Enqueue(v T) {
 
 	node := &Node[T]{
@@ -30,7 +32,7 @@ func (q *Queue[T]) Enqueue(v T) {
 
 	q.mutex.Lock()
 	defer q.mutex.Unlock()
-	
+
 	q.Size++
 
 	if q.Tail == nil {
@@ -43,6 +45,7 @@ func (q *Queue[T]) Enqueue(v T) {
 	q.Tail = node
 }
 
+// Dequeue removes and returns the element at the front of the queue (head). FIFO
 func (q *Queue[T]) Dequeue() (T, bool) {
 
 	q.mutex.Lock()
@@ -66,6 +69,7 @@ func (q *Queue[T]) Dequeue() (T, bool) {
 	return zeroValue, false
 }
 
+// IsEmpty checks if the queue is empty.
 func (q *Queue[T]) IsEmpty() bool {
 	q.mutex.RLock()
 	defer q.mutex.RUnlock()
@@ -73,6 +77,7 @@ func (q *Queue[T]) IsEmpty() bool {
 	return q.Size == 0
 }
 
+// Print to get all values each node.
 func (q *Queue[T]) Print() []T {
 	q.mutex.RLock()
 	defer q.mutex.RUnlock()

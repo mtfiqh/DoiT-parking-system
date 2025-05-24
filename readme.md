@@ -115,3 +115,94 @@ and you can customize the simulation by passing some arguments
 ![queuex coverage](./assets/queuex-coverage.png)
 ### parking cli
 ![parking cli coverage](./assets/parking-cli-coverage.png)
+
+
+## API Blueprint
+Here i will try to describe what i'm going to do to implement the API version of the parking system.
+### API Endpoints
+- `POST /parking/park`: to park a vehicle
+  - Request body: 
+    ```json
+    {
+      "vehicle_type": "B-1",
+      "vehicle_number": "1234"
+    }
+    ```
+  - Response: 
+    ```json
+    {
+      "data": {
+        "spot_id": "1-2-10"
+      },
+      "message": "created"
+    }
+    ```
+- `POST /parking/unpark`: to unpark a vehicle
+  - Request body: 
+    ```json
+    {
+      "spot_id": "1-2-10",
+      "vehicle_number": "1234"
+    }
+    ```
+  - Response: 
+    ```json
+    {
+      "data": {
+        "spot_id": "1-2-10"
+      },
+      "message": "ok"
+    }
+    ```
+- `GET /parking`: to get available parking spots for a vehicle type
+  - Query parameter: `vehicle_type`
+  - Response: 
+    ```json
+    {
+      "data": {
+        "available_spots": [
+          "1-2-10",
+          "1-2-11"
+        ],
+        "total": 2
+      },
+      "message": "ok"
+    }
+    ```
+- `GET /parking/search-vehicle`: to search a vehicle by vehicle number
+  - Query parameter: `vehicle_number`
+  - Response: 
+    ```json
+    {
+      "data": {
+        "spot_id": "1-2-10",
+        "still_parked": false
+      },
+      "message": "ok"
+    }
+    ```
+    
+### ERD
+![ERD](./assets/erd.png)
+
+so in the requirement, we don't need history of vehicles parking spot, the only we need is last parking spot.
+
+### Architecture Diagram and simulating
+![architecture](./assets/architecture.png)
+
+we are not creating fancy stuff here, just the component to make the simulation works, such as
+- API
+- postgreSQL: as database
+- Redis: as lock to handle concurrency
+- Client API: this one will be used to simulate the parking system, it will send request to the API to park and unpark the vehicle.
+
+all the stuff will be `containerized` and will be composed using `docker-compose`.
+so this will be using redis as distributed locking, so if we want to add replica to the `API` we can easily do that!
+
+### TODO
+- [ ] Create pkg to connect to postgreSQL using [sqlx](https://github.com/jmoiron/sqlx)
+- [ ] Create pkg to connect to Redis as distributed locking using [redsync](https://github.com/go-redsync/redsync)
+- [ ] Create migration databsse using [goose](https://github.com/pressly/goose)
+- [ ] Implement the API version of the parking system the router will be using [echo](https://echo.labstack.com/docs/quick-start)
+- [ ] Create client API to simulate the parking system to hit multiple request at the same time
+- [ ] Create dockerfile and docker-compose to run the API, postgreSQL, and Redis
